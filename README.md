@@ -1,6 +1,7 @@
-# secretary-bird
+# Secretary Bird
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A Probot app
+> A GitHub App built with [Probot](https://github.com/probot/probot) that
+> makes sure you've filled out all your paperwork correctly!
 
 ## Setup
 
@@ -17,10 +18,11 @@ npm start
 
 ## Contributing
 
-If you have suggestions for how secretary-bird could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
+If you have suggestions for how Secretary Bird could be improved, or want to
+report a bug, open an issue! We'd love all and any contributions.
 
 For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
-[ISC](LICENSE) © 2018 Chris Fung <chris.fung@coupa.com>
+MIT.

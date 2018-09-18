@@ -4,18 +4,18 @@ import { ChecksCreateParams } from "@octokit/rest";
 type Config = {
   pull_request_title: {
     pattern: string;
-    failure_message: string | null | undefined;
-    success_message: string | null | undefined;
+    failure_message?: string;
+    success_message?: string;
   };
   commit_message: {
     pattern: string;
-    failure_message: string | null | undefined;
-    success_message: string | null | undefined;
+    failure_message?: string;
+    success_message?: string;
   };
 };
 
 export async function run_checks(context: Context) {
-  const config = await context.config("secretary-bird.yml", {
+  const config = await context.config<Config>("secretary-bird.yml", {
     pull_request_title: {
       pattern: ".*"
     },

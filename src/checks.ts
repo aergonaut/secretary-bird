@@ -89,7 +89,9 @@ async function check_title(context: Context, config: Config) {
 
 type CommitInfo = {
   sha: string;
-  message: string;
+  commit: {
+    message: string;
+  };
 };
 
 async function check_commits(context: Context, config: Config) {
@@ -107,7 +109,7 @@ async function check_commits(context: Context, config: Config) {
 
   const commit_message_regex = new RegExp(config.commit_message.pattern);
   const pattern_failed_commits = commits.filter(
-    commit => !commit_message_regex.test(commit.message)
+    (commit) => !commit_message_regex.test(commit.commit.message)
   );
 
   let data: ChecksCreateParams;
@@ -116,9 +118,11 @@ async function check_commits(context: Context, config: Config) {
     summary.push(
       "One or more commits in this Pull Request do not follow the repository's configured commit message format.\n"
     );
-    summary.push(`The required format is: \`${commit_message_regex}\`.\n`);
-    pattern_failed_commits.forEach(commit => {
-      summary.push(`\`${commit.sha}\` ${commit.message}`);
+    summary.push(
+      `The required format is: \`${commit_message_regex}\`. These commits had messages that did not follow the format:\n`
+    );
+    pattern_failed_commits.forEach((commit) => {
+      summary.push(`- \`${commit.sha}\` ${commit.commit.message}`);
     });
 
     data = {

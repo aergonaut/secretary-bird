@@ -29,6 +29,7 @@ export async function run_checks(context: Context) {
 
 async function check_title(context: Context, config: Config) {
   context.log("checking title...");
+  const started_at = new Date();
 
   const pr = context.payload.pull_request;
   let title: string = pr.title;
@@ -59,6 +60,7 @@ async function check_title(context: Context, config: Config) {
       head_sha: pr.head.sha,
       status: "completed",
       conclusion: "action_required",
+      started_at: started_at.toISOString(),
       completed_at: new Date().toISOString(),
       output: {
         title: "Title format",
@@ -96,6 +98,7 @@ type CommitInfo = {
 
 async function check_commits(context: Context, config: Config) {
   context.log("checking commits...");
+  const started_at = new Date();
 
   const pr = context.payload.pull_request;
 
@@ -132,6 +135,7 @@ async function check_commits(context: Context, config: Config) {
       head_sha: pr.head.sha,
       status: "completed",
       conclusion: "action_required",
+      started_at: started_at.toISOString(),
       completed_at: new Date().toISOString(),
       output: {
         title: "Commit Messages",
@@ -148,6 +152,7 @@ async function check_commits(context: Context, config: Config) {
       head_sha: pr.head.sha,
       status: "completed",
       conclusion: "success",
+      started_at: started_at.toISOString(),
       completed_at: new Date().toISOString(),
       output: {
         title: "Commit Messages",
